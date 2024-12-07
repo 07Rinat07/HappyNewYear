@@ -1,5 +1,12 @@
 <?php
 
+spl_autoload_register(function ($class) {
+    include 'classes/' . $class . '.php';
+} ) ;
+
+
+
+
 function secondToDate($month, $day) {
     // Текущая дата и время
     $currentDate = date('Y-m-d H:i:s');
@@ -40,8 +47,6 @@ $currentDateArray = explode('.', $currentDate);
 $currentMonth = $currentDateArray[0];
 $currentDay = $currentDateArray[1];
 
-// Подключаем класс PDO
-include "classes/PdoConnect.php";
 
 try {
     $pdoInstance = PdoConnect::getInstance();
