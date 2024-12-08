@@ -97,6 +97,38 @@ happyNewYear = {
 
 	sendOrder : () => {
 
+		let url = '/ajax.php',
+			data = {
+				'id' : $('[name=product-id]').val(),
+				'fio' : $('[name=fio]').val(),
+				'phone' : $('[name=phone]').val(),
+				'email' : $('[name=email]').val(),
+				'comment' : $('[name=comment]').val(),
+			};
+
+		$.ajax({
+			url: url,
+			type: "POST",
+			data: data,
+			dataType: 'json',
+			success: (response) => {
+
+		      let errorsBlock = $('.js_error');
+
+		      if (response.errors) {
+		      	
+		      	errorsBlock.html('');
+
+		      	for (let key in response.errors) {
+		      		errorsBlock.append(response.errors[key] + '<br>');
+		      	}
+		      } else {
+		      	if (response.res == true) {
+		      		errorsBlock.html('Заказ оформлен!');
+		      	}
+		      }
+			}
+		});
 	},
 };
 
@@ -158,10 +190,9 @@ $(() => {
 	}
 
 	if (secondTo) {
-		var date = new Date(),
-			utcCorrection = (-date.getTimezoneOffset() - 60 * 3) * 60 * 1000,
-			deadline = new Date((date.getTime() + secondTo * 1000) - utcCorrection);
-
+		var date = new Date();
+		var utcCorrection = (-date.getTimezoneOffset() - 60 * 3) * 60 * 1000;
+		var deadline = new Date((date.getTime() + secondTo * 1000) - utcCorrection);
 		initializeClock('timer', deadline);
 	}
 });

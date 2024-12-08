@@ -2,70 +2,59 @@
 
 spl_autoload_register(function ($class) {
     include 'classes/' . $class . '.php';
-} ) ;
+});
 
+function secondToDate($mounth, $day) {
 
+	$currentDate = date('Y.m.d.H.i.s', time());
+	$currentDateArray = explode('.', $currentDate);
 
+	if ($currentDateArray[1] > $mounth || ($currentDateArray[1] == $mounth && $currentDateArray[2] > $day)) {
+		$year = $currentDateArray[0] + 1;
+	} elseif ($currentDateArray[1] == $mounth && $currentDateArray[2] == $day) {
+		return 0;
+	} else {
+		$year = $currentDateArray[0];
+	}
 
-function secondToDate($month, $day) {
-    // Текущая дата и время
-    $currentDate = date('Y-m-d H:i:s');
-    $currentDateArray = explode('-', date('Y-m-d-H-i-s', strtotime($currentDate)));
+	$dateFrom = date_create($currentDateArray[0] . "-" . $currentDateArray[1] . "-" . $currentDateArray[2] . " " . $currentDateArray[3] . ":" . $currentDateArray[4] . ":" . $currentDateArray[5]);
+	$dateTo = date_create($year . "-" . $mounth . "-" . $day);
 
-    // Определяем год следующего события
-    if ($currentDateArray[1] > $month || ($currentDateArray[1] == $month && $currentDateArray[2] > $day)) {
-        $year = $currentDateArray[0] + 1;
-    } elseif ($currentDateArray[1] == $month && $currentDateArray[2] == $day) {
-        return 0; // Если сегодня тот самый день
-    } else {
-        $year = $currentDateArray[0];
-    }
+	$diff = date_diff($dateTo, $dateFrom);
 
-    // Формируем даты
-    $dateFrom = date_create($currentDate);
-    $dateTo = date_create("$year-$month-$day");
-
-    // Разница между датами
-    $diff = date_diff($dateTo, $dateFrom);
-
-    // Переводим разницу в секунды
-    return ($diff->y * 365 * 24 * 60 * 60) +
-           ($diff->m * 30 * 24 * 60 * 60) +
-           ($diff->d * 24 * 60 * 60) +
-           ($diff->h * 60 * 60) +
-           ($diff->i * 60) +
-           $diff->s;
+	return  ($diff->y * 365 * 24 * 60 * 60) +
+			($diff->m * 30 * 24 * 60 * 60) +
+			($diff->d * 24 * 60 * 60) +
+			($diff->h * 60 * 60) +
+			($diff->i * 60) +
+			$diff->s;
 }
 
-// Пример использования
 $secondTo = secondToDate(12, 24);
 
-// Получаем текущую дату
-$currentDate = date('m.d');
-$currentDateArray = explode('.', $currentDate); 
+$currentDate = date('m.d', time());
+$currentDateArray = explode('.', $currentDate);
 
-$currentMonth = $currentDateArray[0];
+$currentMounth = $currentDateArray[0];
 $currentDay = $currentDateArray[1];
 
+$currentMounth = 12;
+$currentDay = 24;
 
-try {
-    $pdoInstance = PdoConnect::getInstance();
-    $pdo = $pdoInstance->getConnection();
+if ($currentMounth == 12 && $currentDay >= 24) {
+	$PDO = PdoConnect::getInstance();
 
-    // Пример простого запроса, чтобы убедиться в правильности подключения
-    $stmt = $pdo->query("SELECT 1");
-    if ($stmt) {
-        echo "Подключение к базе данных успешно!";
-    } else {
-        echo "Ошибка выполнения запроса.";
-    }
-} catch (Exception $e) {
-    die("Ошибка: " . $e->getMessage());
-}
+	$result = $PDO->PDO->query("
+		SELECT * FROM `goods`
+	");
 
-// Логика подключения файла
-if ($currentMonth == 12 && $currentDay >= 24) {
-    include 'online_store.php'; // Если текущая дата >= 24 декабря
+	$products = array();
+
+	while ($productInfo = $result->fetch()) {
+		$products[] = $productInfo;
+	}
+
+	include 'online_store.php';
 } else {
-    include 'timer.php'; // До наступления 24 декабря
+	include 'timer.php';
 }

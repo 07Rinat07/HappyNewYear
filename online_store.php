@@ -51,140 +51,16 @@
 		<section class="product-box">
 			<h2>Каталог</h2>
 			<div class="row">
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-1.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Рождественский венок</span>
-						<span class="product_price">800 руб.</span>
-						<button class="js_buy">Купить</button>
+				<?foreach ($products as $product):?>
+					<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent" data-id="<?=$product['id']?>">
+						<div class="product">
+							<div class="product-pic" style="background: url('<?=$product['image']?>') no-repeat; background-size: auto 100%; background-position: center"></div>
+							<span class="product-name"><?=$product['name']?></span>
+							<span class="product_price"><?=$product['price']?> руб.</span>
+							<button class="js_buy">Купить</button>
+						</div>
 					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-2.png') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Шоколадный дед мороз</span>
-						<span class="product_price">100 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-3.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Новогодняя Ёлка</span>
-						<span class="product_price">9900 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-4.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Сладкая коробка</span>
-						<span class="product_price">600 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-5.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Фигурка деда мороза</span>
-						<span class="product_price">2000 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-6.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Новогодний шар</span>
-						<span class="product_price">3000 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-7.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Шар на елку</span>
-						<span class="product_price">300 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-8.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Мишура</span>
-						<span class="product_price">120 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-9.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Гирлянда "Лампочки"</span>
-						<span class="product_price">1200 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-10.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Новогоднее шампанское</span>
-						<span class="product_price">240 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-11.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Коробка конфет</span>
-						<span class="product_price">250 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-12.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Подарок "Сюрприз"</span>
-						<span class="product_price">900 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-13.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Звезда на Елку</span>
-						<span class="product_price">400 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-14.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Шапка новогодняя</span>
-						<span class="product_price">600 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-15.jpg') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Бенгальские огни</span>
-						<span class="product_price">100 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
-				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 product-parent">
-					<div class="product">
-						<div class="product-pic" style="background: url('static/img/product-16.png') no-repeat; background-size: auto 100%; background-position: center"></div>
-						<span class="product-name">Хлопушка</span>
-						<span class="product_price">80 руб.</span>
-						<button class="js_buy">Купить</button>
-					</div>
-				</div>
+				<?endforeach?>
 			</div>
 		</section>
 		<footer>

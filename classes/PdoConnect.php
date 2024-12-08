@@ -1,45 +1,40 @@
 <?php
 
 class PdoConnect {
-    private const HOST = 'MySQL-8.0'; // Хост MySQL  в моем случае это не локалхост
 
-    private const DB = 'happynewyear'; // Имя базы данных
-    private const USER = 'root'; // Пользователь MySQL
-    private const PASS = ''; // Пароль MySQL (мой пустой)
-    private const CHARSET = 'utf8mb4'; // Рекомендуемая кодировка
+	private const HOST = 'MySQL-8.0';
+	private const DB = 'happynewyear';
+	private const USER = 'root';
+	private const PASS = '';
+	private const CHARSET = 'utf8';
 
+	protected static $_instance;
 
-    protected static $_instance;
+	protected $DSN;
+	protected $OPD;
+	public $PDO;
 
-    protected $dsn;
-    protected $options;
-    protected $pdo;
+	private function __construct() {
+		
+		$this->DSN = "mysql:host=" . self::HOST . ";dbname=" . self::DB . ";charset=" . self::CHARSET;
 
-    private function __construct() {
-        $this->dsn = "mysql:host=" . self::HOST . ";port=" .  ";dbname=" . self::DB . ";charset=" . self::CHARSET;
-        $this->options = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // Режим ошибок
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, // Ассоциативные массивы
-            PDO::ATTR_EMULATE_PREPARES => false, // Отключение эмуляции запросов
-        ];
+		$this->OPD = array(
+			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+			PDO::ATTR_EMULATE_PREPARES => false,
+		);
 
-        try {
-            $this->pdo = new PDO($this->dsn, self::USER, self::PASS, $this->options);
-        } catch (PDOException $e) {
-            die('Ошибка подключения к базе данных: ' . $e->getMessage());
-        }
-    }
+		$this->PDO = new PDO($this->DSN, self::USER, self::PASS, $this->OPD);
+	}
 
-    public function getConnection() {
-        return $this->pdo;
-    }
+	public static function getInstance() {
 
-    public static function getInstance() {
-       if (self::$_instance === null) 
-        self::$_instance = new self;
-        return self::$_instance;
-       }
+		if (self::$_instance === null)
+			self::$_instance = new self;
 
-       private function __clone() {}
-  
+		return self::$_instance;
+	}
+
+	private function __clone() {}
+	
 }
